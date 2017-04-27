@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XApp"
+             xmlns:win="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null, ContentType=WindowsRuntime;targetPlatform=Windows"
+             x:Class="XApp.MainPage">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    Android="20, 20, 20, 20"
+                    WinPhone="20, 20, 20, 20" />
+    </ContentPage.Padding>
+
+    <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     Orientation="Vertical"
+                     Spacing="15">
+        <Button x:Name="captureButton" Text="Capture Image" Clicked="captureButton_Clicked"></Button>
+        <ContentView x:Name="InkingToolbar" IsVisible="False">
+            <win:InkToolbar></win:InkToolbar>
+        </ContentView>
+        <Grid x:Name="ImageGrid" IsVisible="False">
+            <Image x:Name="image" BindingContext="" Source="{Binding _nose.Image}"></Image>
+            <ContentView x:Name="InkingContent">
+                <win:InkCanvas></win:InkCanvas>
+            </ContentView>
+            <AbsoluteLayout>
+                <Image x:Name="noseImage"
+                       HeightRequest="120" 
+                       WidthRequest="120" 
+                       AbsoluteLayout.LayoutBounds="0, 0, AutoSize, AutoSize" 
+                       AbsoluteLayout.LayoutFlags="None">
+                    <Image.GestureRecognizers>
+                        <PanGestureRecognizer PanUpdated="OnPanUpdated" />
+                        <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+                    </Image.GestureRecognizers>
+                </Image>
+                
+            </AbsoluteLayout>
+            
+        </Grid>
+    </StackLayout>
+
+
+
+</ContentPage>
